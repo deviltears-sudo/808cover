@@ -25,26 +25,12 @@
       prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
       showNavigator: true,
       homeFillsViewer: true,
-      visibilityRatio: 1,
-      minZoomLevel: 0,
-      defaultZoomLevel: 0,
-      tileSources: {
-        type: "zoomify",
-        url: "", // Root-Ordner (index.html + ImageProperties.xml + TileGroups)
-        width: 8640,
-        height: 11520,
-        tileSize: 256,
-        overlap: 0,
-        fileFormat: "jpg"
-      }
+      tileSources: "ImageProperties.xml"  // direkte relative Pfadangabe
     });
 
-    // Debug
-    console.log("Aktuelle Seite:", window.location.href);
     viewer.addHandler("open", () => console.log("OSD open OK"));
     viewer.addHandler("open-failed", e => console.error("open-failed:", e));
     viewer.addHandler("tile-load-failed", e => console.error("tile-load-failed:", e));
-    viewer.addHandler("tile-loaded", e => console.log("Tile geladen:", e.tile.url));
   </script>
 </body>
 </html>
