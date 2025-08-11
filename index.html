@@ -14,7 +14,16 @@
       prefixUrl:"https://openseadragon.github.io/openseadragon/images/",
       showNavigator:true,
       homeFillsViewer:true,
-      tileSources:{ type:"zoomify", url:"./" }   // Ordner mit ImageProperties.xml + TileGroup0…
+      tileSources:{
+        type:"zoomify",
+        url:"./",          // Root neben index.html
+        width:8640,
+        height:11520,
+        tileSize:256,
+        overlap:0,
+        // WICHTIG: bei Zoomify heißt die Option "format", nicht "fileFormat"
+        format:"jpg"
+      }
     });
     viewer.addHandler("open", ()=>console.log("OSD open OK"));
     viewer.addHandler("open-failed", e=>console.error("open-failed:", e));
