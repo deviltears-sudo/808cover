@@ -4,27 +4,21 @@
   <meta charset="utf-8">
   <title>808 Cover Zoom</title>
   <script src="https://openseadragon.github.io/openseadragon/openseadragon.min.js"></script>
-  <style>
-    html,body { margin:0; height:100% }
-    #osd { width:100%; height:100vh; background:#000 }
-  </style>
+  <style>html,body{margin:0;height:100%}#osd{width:100%;height:100vh;background:#000}</style>
 </head>
 <body>
   <div id="osd"></div>
   <script>
     const viewer = OpenSeadragon({
-      id: "osd",
-      prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
-      showNavigator: true,
-      homeFillsViewer: true,
-      // WICHTIG: für Zoomify immer den ORDNER angeben (hier: Root neben index.html)
-      tileSources: { type: "zoomify", url: "" }
+      id:"osd",
+      prefixUrl:"https://openseadragon.github.io/openseadragon/images/",
+      showNavigator:true,
+      homeFillsViewer:true,
+      tileSources:{ type:"zoomify", url:"./" }   // Ordner mit ImageProperties.xml + TileGroup0…
     });
-
-    // Debug
-    viewer.addHandler("open", () => console.log("OSD open OK"));
-    viewer.addHandler("open-failed", e => console.error("open-failed:", e));
-    viewer.addHandler("tile-load-failed", e => console.error("tile-load-failed:", e));
+    viewer.addHandler("open", ()=>console.log("OSD open OK"));
+    viewer.addHandler("open-failed", e=>console.error("open-failed:", e));
+    viewer.addHandler("tile-load-failed", e=>console.error("tile-load-failed:", e));
   </script>
 </body>
 </html>
