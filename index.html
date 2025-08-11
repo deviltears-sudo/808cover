@@ -11,18 +11,31 @@
 </head>
 <body>
   <div id="osd"></div>
-  <script>
-    const viewer = OpenSeadragon({
-      id: "osd",
-      prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
-      showNavigator: true,
-      tileSources: {
-  type: "zoomify",
-  url: "./",          // Ordner, in dem ImageProperties.xml + TileGroup0… liegen
-  width: 8640,
-  height: 11520,
-  tileSize: 256,
-  overlap: 1          // Zoomify nutzt i.d.R. 1 Pixel Overlap
+ <script>
+  const viewer = OpenSeadragon({
+    id: "osd",
+    prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
+    showNavigator: true,
+    homeFillsViewer: true,
+    tileSources: {
+      type: "zoomify",
+      url: "./",        // XML + TileGroups liegen neben index.html
+      width: 8640,
+      height: 11520,
+      tileSize: 256,
+      overlap: 0        // Zoomify nutzt normalerweise 0
+    }
+  });
+
+  viewer.addHandler("open-failed", e => console.error("open-failed:", e));
+  viewer.addHandler("tile-load-failed", e => console.error("tile-load-failed:", e));
+</script>
+
+
+  viewer.addHandler("open-failed", e => console.error("open-failed:", e));
+  viewer.addHandler("tile-load-failed", e => console.error("tile-load-failed:", e));
+</script>
+
 }
 
     });
