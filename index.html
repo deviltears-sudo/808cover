@@ -17,23 +17,25 @@
     prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
     showNavigator: true,
     homeFillsViewer: true,
+    // hilfreiche Defaults
+    visibilityRatio: 1,
+    minZoomLevel: 0,
+    defaultZoomLevel: 0,  // passt sich Home an
     tileSources: {
       type: "zoomify",
-      url: "./",        // XML + TileGroups liegen neben index.html
+      url: "./",          // HIER liegen ImageProperties.xml + TileGroup0..8
       width: 8640,
       height: 11520,
       tileSize: 256,
-      overlap: 0        // Zoomify nutzt normalerweise 0
+      overlap: 0,         // Zoomify nutzt i.d.R. 0 (nicht 1)
+      fileFormat: "jpg"   // erzwingt .jpg (klein geschrieben)
     }
   });
 
+  viewer.addHandler("open", () => console.log("OSD open OK"));
   viewer.addHandler("open-failed", e => console.error("open-failed:", e));
   viewer.addHandler("tile-load-failed", e => console.error("tile-load-failed:", e));
 </script>
 
-    viewer.addHandler("open-failed",   e => console.error("open-failed:", e));
-    viewer.addHandler("tile-load-failed", e => console.error("tile-load-failed:", e));
-    console.log("Lade ImageProperties.xml …");
-  </script>
 </body>
 </html>
