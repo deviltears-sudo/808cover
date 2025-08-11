@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>808 Cover Zoom</title>
+  <script src="https://openseadragon.github.io/openseadragon/openseadragon.min.js"></script>
+  <style>
+    html,body{margin:0;height:100%;background:#000}
+    #osd{width:100%;height:100%}
+  </style>
+</head>
+<body>
+  <div id="osd"></div>
+  <script>
+    OpenSeadragon({
+      id:"osd",
+      prefixUrl:"https://openseadragon.github.io/openseadragon/images/",
+      tileSources:{ type:"zoomify", url:"cover_zoom/" } // Ordner mit ImageProperties.xml
+    });
+  </script>
+</body>
+</html>
