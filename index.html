@@ -12,12 +12,15 @@
 <body>
   <div id="osd"></div>
   <script>
-    OpenSeadragon({
+    const viewer = OpenSeadragon({
       id: "osd",
       prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
+      showNavigator: true,
       tileSources: "https://deviltears-sudo.github.io/808cover/ImageProperties.xml"
- // Tiles + ImageProperties.xml liegen im selben Ordner wie index.html
     });
+    viewer.addHandler("open-failed",   e => console.error("open-failed:", e));
+    viewer.addHandler("tile-load-failed", e => console.error("tile-load-failed:", e));
+    console.log("Lade ImageProperties.xml …");
   </script>
 </body>
 </html>
