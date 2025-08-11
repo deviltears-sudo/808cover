@@ -22,10 +22,16 @@
     minZoomLevel: 0,
     defaultZoomLevel: 0,  // passt sich Home an
     tileSources: {
-  type: "image",
-  url: "TileGroup0/0-0-0.jpg",
-  buildPyramid: false
+  type: "zoomify",
+  url: "./",
+  width: 8640,
+  height: 11520,
+  tileSize: 256,
+  overlap: 0,
+  fileFormat: "jpg",
+  path: "" // wichtig bei Root-Lage der Tiles
 }
+
 
       width: 8640,
       height: 11520,
