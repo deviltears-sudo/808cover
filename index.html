@@ -30,7 +30,7 @@
       defaultZoomLevel: 0,
       tileSources: {
         type: "zoomify",
-        url: "", // Root: gleicher Ordner wie index.html
+        url: "", // Root-Ordner (index.html + ImageProperties.xml + TileGroups)
         width: 8640,
         height: 11520,
         tileSize: 256,
@@ -39,12 +39,12 @@
       }
     });
 
-    // Debug-Ausgabe
+    // Debug
     console.log("Aktuelle Seite:", window.location.href);
-
     viewer.addHandler("open", () => console.log("OSD open OK"));
     viewer.addHandler("open-failed", e => console.error("open-failed:", e));
     viewer.addHandler("tile-load-failed", e => console.error("tile-load-failed:", e));
+    viewer.addHandler("tile-loaded", e => console.log("Tile geladen:", e.tile.url));
   </script>
 </body>
 </html>
