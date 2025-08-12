@@ -40,7 +40,67 @@
     // Start auf die 808
     viewer.addHandler("open", () => {
       const vp = viewer.viewport;
-      const targetPoint = new OpenSeadragon.Point(0.5477, 0.5704); // <- deine gemessenen Koordinaten
+      const targetPoint = new OpenSeadragon.Point(<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <title>808 Cover Zoom</title>
+  <script src="https://openseadragon.github.io/openseadragon/openseadragon.min.js"></script>
+  <style>
+    html,body { margin:0; height:100% }
+    #osd { width:100%; height:100vh; background:#000 }
+  </style>
+</head>
+<body>
+  <div id="osd"></div>
+
+  <script>
+    // Sicherheits-Log
+    window.onerror = (m, s, l, c, e) => console.error("JS-Error:", m, s+":"+l+":"+c, e);
+
+    const viewer = OpenSeadragon({
+      id: "osd",
+      prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
+      showNavigator: true,
+      homeFillsViewer: true,
+      visibilityRatio: 1,
+      constrainDuringPan: true,
+      gestureSettingsMouse: { clickToZoom: false, dblClickToZoom: true }
+    });
+
+    // Fester Zoomify-TileSource (absolute URL zu deinem Pages-Root)
+    const tileSource = new OpenSeadragon.ZoomifyTileSource({
+      width: 8640,
+      height: 11520,
+      tileSize: 256,
+      tileOverlap: 0,
+      tilesUrl: "https://deviltears-sudo.github.io/808cover/"
+    });
+
+    viewer.open(tileSource);
+
+    // Start auf die 808
+    viewer.addHandler("open", () => {
+      const vp = viewer.viewport;
+      const targetPoint = new OpenSeadragon.Point(0.5334 0.6789); // <- deine gemessenen Koordinaten
+      const targetZoom  = 9; // 8–12 = nah. Bei Bedarf anpassen.
+      vp.panTo(targetPoint, true);
+      vp.zoomTo(targetZoom, targetPoint, true);
+      console.log("OSD open OK → panTo", targetPoint, "zoomTo", targetZoom);
+    });
+
+    // Debug / Koordinaten-Finder
+    viewer.addHandler("canvas-click", (e) => {
+      const p = viewer.viewport.pointFromPixel(e.position);
+      console.log("panTo:", p.x.toFixed(4), p.y.toFixed(4));
+    });
+    viewer.addHandler("open-failed", e => console.error("open-failed:", e));
+    viewer.addHandler("tile-load-failed", e => console.error("tile-load-failed:", e));
+    viewer.addHandler("tile-loaded", e => console.log("Tile:", e.tile.url));
+  </script>
+</body>
+</html>
+); // <- deine gemessenen Koordinaten
       const targetZoom  = 9; // 8–12 = nah. Bei Bedarf anpassen.
       vp.panTo(targetPoint, true);
       vp.zoomTo(targetZoom, targetPoint, true);
