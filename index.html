@@ -5,8 +5,8 @@
   <title>808 Cover Zoom</title>
   <script src="https://openseadragon.github.io/openseadragon/openseadragon.min.js"></script>
   <style>
-    html,body{margin:0;height:100%}
-    #osd{width:100%;height:100vh;background:#000}
+    html,body { margin:0; height:100% }
+    #osd { width:100%; height:100vh; background:#000 }
   </style>
 </head>
 <body>
@@ -16,18 +16,20 @@
       id: "osd",
       prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
       showNavigator: true,
-      homeFillsViewer: true,
-      // WICHTIG: Zoomify erwartet tilesUrl + tileOverlap
-      tileSources: {
-        type: "zoomify",
-        tilesUrl: "./",        // Ordner mit ImageProperties.xml + TileGroup0…
-        width: 8640,
-        height: 11520,
-        tileSize: 256,
-        tileOverlap: 0         // statt "overlap"
-        // format weglassen -> Standard ist jpg
-      }
+      homeFillsViewer: true
     });
+
+    // >>> Harter Zoomify-TileSource (kein Raten mehr)
+    const tileSource = new OpenSeadragon.ZoomifyTileSource({
+      width: 8640,
+      height: 11520,
+      tileSize: 256,
+      tileOverlap: 0,
+      tilesUrl: "https://deviltears-sudo.github.io/808cover/"  // absoluter Pfad zu deinem Repo-Root
+      // (dort liegen ImageProperties.xml + TileGroup0..8)
+    });
+
+    viewer.open(tileSource);
 
     // Debug
     viewer.addHandler("open", () => console.log("OSD open OK"));
