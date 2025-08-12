@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>808 Cover Zoom</title>
   <script src="https://openseadragon.github.io/openseadragon/openseadragon.min.js"></script>
-  <style>html,body{margin:0;height:100%}#osd{width:100%;height:100vh;background:#000}</style>
+  <style>
+    html,body{margin:0;height:100%}
+    #osd{width:100%;height:100vh;background:#000}
+  </style>
 </head>
 <body>
   <div id="osd"></div>
   <script>
     const viewer = OpenSeadragon({
-      id:"osd",
-      prefixUrl:"https://openseadragon.github.io/openseadragon/images/",
-      showNavigator:true,
-      homeFillsViewer:true,
-      tileSources:{
-        type:"zoomify",
-        url:"./",          // Root neben index.html
-        width:8640,
-        height:11520,
-        tileSize:256,
-        overlap:0,
-        // WICHTIG: bei Zoomify heißt die Option "format", nicht "fileFormat"
-        format:"jpg"
+      id: "osd",
+      prefixUrl: "https://openseadragon.github.io/openseadragon/images/",
+      showNavigator: true,
+      homeFillsViewer: true,
+      // WICHTIG: Zoomify erwartet tilesUrl + tileOverlap
+      tileSources: {
+        type: "zoomify",
+        tilesUrl: "./",        // Ordner mit ImageProperties.xml + TileGroup0…
+        width: 8640,
+        height: 11520,
+        tileSize: 256,
+        tileOverlap: 0         // statt "overlap"
+        // format weglassen -> Standard ist jpg
       }
     });
-    viewer.addHandler("open", ()=>console.log("OSD open OK"));
-    viewer.addHandler("open-failed", e=>console.error("open-failed:", e));
-    viewer.addHandler("tile-load-failed", e=>console.error("tile-load-failed:", e));
+
+    // Debug
+    viewer.addHandler("open", () => console.log("OSD open OK"));
+    viewer.addHandler("open-failed", e => console.error("open-failed:", e));
+    viewer.addHandler("tile-load-failed", e => console.error("tile-load-failed:", e));
+    viewer.addHandler("tile-loaded", e => console.log("Tile:", e.tile.url));
   </script>
 </body>
 </html>
